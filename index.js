@@ -12,30 +12,40 @@ let rollbar = new Rollbar({
 });
 
 // record a generic message and send it to Rollbar
-rollbar.log("Hello world!");
+
 
 const app = express()
 app.use(express.json())
+let cars = []
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'))
     rollbar.info('you got served!')
 })
 
-let cars = []
 app.post('/api/cars', (req, res) => {
-    let {car} = req.body
-    car = car.toLowerCase()
-    if(car === 'mustang'){
-        cars.push(car)
+    let {coolCar} = req.body
+    console.log(coolCar);
+    coolCar = coolCar.toLowerCase()
+    if(coolCar === 'mustang'){
+        cars.push(coolCar)
         rollbar.info('nice ride!')
     }else{
         rollbar.info('please enter a cool car')
     }
     res.status(200).send(cars)
 })
+console.log(cars);
+
+
+app.get('')
 
 const port = process.env.PORT || 4545
 console.log(port);
 
+app.use(rollbar.errorHandler())
 app.listen(port, () => console.log(`Are we there yet? ${port}`))
+
+
+
+

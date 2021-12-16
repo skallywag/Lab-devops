@@ -5,30 +5,34 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Cars</title>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     </head>
-<body>
-    <h1>Add your favorite car</h1>
+    <body>
+        <h1>Add your favorite car</h1>
     <form>
         <input type="text" placeholder="Enter a car"/>
         <button>Add Wheels</button>
     </form>
 
-
     <script>
         const addForm = document.querySelector('form')
         const carInput = document.querySelector('input')
+        // console.log(carInput);
 
         function submitHandler(e){
             e.preventDefault()
-            axios.post('/api/cars', {car: carInput.value})
+            axios.post('/api/cars', {coolCar: carInput.value})
                 .then(res => console.log(res)) 
                 .catch(err => console.log(err))
         }
         addForm.addEventListener('submit', submitHandler)
-
-
     </script>
     
+
+
+
+
+
+
 </body>
 </html>
