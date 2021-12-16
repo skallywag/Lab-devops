@@ -21,9 +21,18 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'))
     rollbar.info('you got served!')
 })
+
 let cars = []
-app.post('/api/', (req, res) => {
-    rollbar.info('end point doesnt exist')
+app.post('/api/cars', (req, res) => {
+    let {car} = req.body
+    car = car.toLowerCase()
+    if(car === 'mustang'){
+        cars.push(car)
+        rollbar.info('nice ride!')
+    }else{
+        rollbar.info('please enter a cool car')
+    }
+    res.status(200).send(cars)
 })
 
 const port = process.env.PORT || 4545
